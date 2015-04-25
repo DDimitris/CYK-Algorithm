@@ -17,6 +17,7 @@ public class Cell {
     private String thisCellValue;
     private boolean isDiagonal;
     private String thisCellWord;
+    private boolean isUsed = false;
 
     public Cell(CellPoint leftChild, CellPoint rightChild, String thisCellValue, boolean isDiagonal, String thisCellWord) {
         this.leftChild = leftChild;
@@ -64,6 +65,14 @@ public class Cell {
 
     public void setThisCellWord(String thisCellWord) {
         this.thisCellWord = thisCellWord;
+    }
+
+    public boolean isIsUsed() {
+        return isUsed;
+    }
+
+    public void setIsUsed(boolean isUsed) {
+        this.isUsed = isUsed;
     }
 
     @Override

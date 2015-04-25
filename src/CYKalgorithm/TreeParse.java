@@ -5,6 +5,7 @@
 package CYKalgorithm;
 
 import Utils.Cell;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,13 +27,24 @@ public class TreeParse {
     public void printTree() {
         System.out.println(numOfColumns + " " + numOfRows);
         List<Cell> startCell = matrix[numOfColumns - 1][0];
-        for (Cell cell : startCell) {
-            printRecurr(cell, 0, null);
-            break;
+        for (Cell c : startCell) {
+            List<Cell> hack = new ArrayList<>();
+            hack.add(c);
+            printRecurr(hack, 0, null);
         }
     }
 
-    private void printRecurr(Cell cell, int depth, Boolean isLeft) {
+    @SuppressWarnings("unchecked")
+    private void printRecurr(List<Cell> cells, int depth, Boolean isLeft) {
+        Cell cell = null;
+        for (Cell c : cells) {
+            if (c.isIsUsed() && cells.size() > 1) {
+                continue;
+            } else {
+                cell = c;
+                break;
+            }
+        }
         System.out.print("|");
         for (int i = 0; i <= depth; i++) {
             System.out.print("-");
@@ -45,11 +57,12 @@ public class TreeParse {
             System.out.print(cell.getThisCellValue() + " Left");
         }
         System.out.println();
+        cell.setIsUsed(true);
         if (matrix[cell.getLeftChild().getX()][cell.getLeftChild().getY()] != null) {
-            printRecurr(matrix[cell.getLeftChild().getX()][cell.getLeftChild().getY()].get(0), depth + 1, true);
+            printRecurr(matrix[cell.getLeftChild().getX()][cell.getLeftChild().getY()], depth + 1, true);
         }
         if (matrix[cell.getRightChild().getX()][cell.getRightChild().getY()] != null) {
-            printRecurr(matrix[cell.getRightChild().getX()][cell.getRightChild().getY()].get(0), depth + 1, false);
+            printRecurr(matrix[cell.getRightChild().getX()][cell.getRightChild().getY()], depth + 1, false);
         }
     }
     /*

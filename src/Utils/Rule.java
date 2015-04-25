@@ -13,7 +13,7 @@ public class Rule<K, V, T> {
     private K nonTerminalSymbol;
     private V firstSymbol;
     private T secondSymbol;
-    
+
     public Rule(K nonTerminalSymbol) {
         this.nonTerminalSymbol = nonTerminalSymbol;
     }
@@ -37,8 +37,4 @@ public class Rule<K, V, T> {
     public void setSecondSymbol(T secondSymbol) {
         this.secondSymbol = secondSymbol;
     }
-    
-
-
-
 }

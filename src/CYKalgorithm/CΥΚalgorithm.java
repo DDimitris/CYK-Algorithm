@@ -54,7 +54,7 @@ public class CΥΚalgorithm {
         int cellCounter = 1;
         int middle;
         boolean isActive = true;
-            matrix[col][row] = new ArrayList();
+        matrix[col][row] = new ArrayList();
         while (isActive) {
             middle = col - cellCounter;
             System.out.println("Cheking [ " + col + " , " + middle + " ]" + " , [ " + middle + " , " + row + " ]");
@@ -92,7 +92,7 @@ public class CΥΚalgorithm {
         for (int i = 1; i < col; i++) {
             matrix[i][i - 1] = new ArrayList<>();
             String get = lexicon.get(split[i - 1]);
-            Cell cell = new Cell(new CellPoint(0, 0), new CellPoint(0, 0), get, true, split[i-1]);
+            Cell cell = new Cell(new CellPoint(0, 0), new CellPoint(0, 0), get, true, split[i - 1]);
             matrix[i][i - 1].add(cell);
         }
     }
@@ -111,17 +111,17 @@ public class CΥΚalgorithm {
                     continue;
                 }
                 if (matrix[j][i].size() > 1) {
-                    for(Cell cell : matrix[j][i]){
-                    System.out.print(cell.getThisCellValue() + " ");
-                    System.out.print("[" + cell.getLeftChild().getX() + "," + cell.getLeftChild().getY() + "] [");
-                    System.out.print(cell.getRightChild().getX() + "," + cell.getRightChild().getY() + "]");
+                    for (Cell cell : matrix[j][i]) {
+                        System.out.print(cell.getThisCellValue() + " ");
+                        System.out.print("[" + cell.getLeftChild().getX() + "," + cell.getLeftChild().getY() + "] [");
+                        System.out.print(cell.getRightChild().getX() + "," + cell.getRightChild().getY() + "]");
                     }
                     System.out.print("\t\t");
                 } else if (matrix[j][i].size() == 1) {
                     System.out.print(matrix[j][i].get(0).getThisCellValue() + " [");
                     System.out.print(matrix[j][i].get(0).getLeftChild().getX() + " , " + matrix[j][i].get(0).getLeftChild().getY() + "] , [");
                     System.out.print(matrix[j][i].get(0).getRightChild().getX() + " , " + matrix[j][i].get(0).getRightChild().getY() + "]\t\t");
-                    
+
                 } else {
                     System.out.print("null\t\t");
                 }
@@ -129,7 +129,7 @@ public class CΥΚalgorithm {
             System.out.println();
         }
     }
-    
+
     public int getNumOfColumns() {
         return col;
     }
@@ -141,5 +141,4 @@ public class CΥΚalgorithm {
     public List<Cell>[][] getMatrix() {
         return matrix;
     }
-    
 }
