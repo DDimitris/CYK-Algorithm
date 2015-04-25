@@ -12,32 +12,34 @@ import java.util.Objects;
  */
 public class Cell {
 
-    private CellPoint x;
-    private CellPoint y;
+    private CellPoint leftChild;
+    private CellPoint rightChild;
     private String thisCellValue;
     private boolean isDiagonal;
+    private String thisCellWord;
 
-    public Cell(CellPoint x, CellPoint y, String thisCellValue, boolean isDiagonal) {
-        this.x = x;
-        this.y = y;
+    public Cell(CellPoint leftChild, CellPoint rightChild, String thisCellValue, boolean isDiagonal, String thisCellWord) {
+        this.leftChild = leftChild;
+        this.rightChild = rightChild;
         this.thisCellValue = thisCellValue;
         this.isDiagonal = isDiagonal;
+        this.thisCellWord = thisCellWord;
     }
 
-    public CellPoint getX() {
-        return x;
+    public CellPoint getLeftChild() {
+        return leftChild;
     }
 
-    public void setX(CellPoint x) {
-        this.x = x;
+    public void setLeftChild(CellPoint x) {
+        this.leftChild = x;
     }
 
-    public CellPoint getY() {
-        return y;
+    public CellPoint getRightChild() {
+        return rightChild;
     }
 
-    public void setY(CellPoint y) {
-        this.y = y;
+    public void setRightChild(CellPoint y) {
+        this.rightChild = y;
     }
 
     public String getThisCellValue() {
@@ -56,11 +58,19 @@ public class Cell {
         this.isDiagonal = isDiagonal;
     }
 
+    public String getThisCellWord() {
+        return thisCellWord;
+    }
+
+    public void setThisCellWord(String thisCellWord) {
+        this.thisCellWord = thisCellWord;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.x);
-        hash = 23 * hash + Objects.hashCode(this.y);
+        hash = 23 * hash + Objects.hashCode(this.leftChild);
+        hash = 23 * hash + Objects.hashCode(this.rightChild);
         hash = 23 * hash + Objects.hashCode(this.thisCellValue);
         return hash;
     }
@@ -74,10 +84,10 @@ public class Cell {
             return false;
         }
         final Cell other = (Cell) obj;
-        if (!Objects.equals(this.x, other.x)) {
+        if (!Objects.equals(this.leftChild, other.leftChild)) {
             return false;
         }
-        if (!Objects.equals(this.y, other.y)) {
+        if (!Objects.equals(this.rightChild, other.rightChild)) {
             return false;
         }
         if (!Objects.equals(this.thisCellValue, other.thisCellValue)) {
