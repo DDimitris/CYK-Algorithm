@@ -25,9 +25,11 @@ public class CΥΚalgorithm {
     private int col;
     private int row;
     private boolean isAboveTheDiagonal = false;
+    private boolean verbose;
 
-    public CΥΚalgorithm(Parser parser) {
+    public CΥΚalgorithm(Parser parser, boolean verbose) {
         this.parser = parser;
+        this.verbose = verbose;
         this.lexicon = parser.getLexicon();
         this.rules = parser.getListOfRules();
     }
@@ -37,7 +39,9 @@ public class CΥΚalgorithm {
         for (int i = 1; i < col; i++) {
             for (int j = row - 1; j >= 0; j--) {
                 if (isAboveTheDiagonal) {
-                    System.out.println("Cell: " + i + ", " + j);
+                    if (verbose) {
+                        System.out.println("Cell: " + i + ", " + j);
+                    }
                     fillCell(i, j);
                 } else {
                     if (matrix[i][j] != null) {
@@ -53,11 +57,12 @@ public class CΥΚalgorithm {
     private void fillCell(int col, int row) {
         int cellCounter = 1;
         int middle;
-        boolean isActive = true;
         matrix[col][row] = new ArrayList();
-        while (isActive) {
+        while (true) {
             middle = col - cellCounter;
-            System.out.println("Cheking [ " + col + " , " + middle + " ]" + " , [ " + middle + " , " + row + " ]");
+            if (verbose) {
+                System.out.println("Cheking [ " + col + " , " + middle + " ]" + " , [ " + middle + " , " + row + " ]");
+            }
             List<Cell> cellOnY = matrix[col][middle];
             List<Cell> cellOnX = matrix[middle][row];
             if (cellOnX != null && cellOnY != null) {
@@ -66,7 +71,6 @@ public class CΥΚalgorithm {
                         for (Rule rule : rules) {
                             if (rule.getFirstSymbol().equals(terminalOnX.getThisCellValue()) && rule.getSecondSymbol().equals(terminalOnY.getThisCellValue())) {
                                 matrix[col][row].add(new Cell(new CellPoint(middle, row), new CellPoint(col, middle), (String) rule.getNonTerminalSymbol(), false, null));
-//                                isActive = false;
                             }
                         }
                     }
@@ -103,7 +107,7 @@ public class CΥΚalgorithm {
      * values of cells that were not initialized before, you get null pointer
      * exception.
      */
-    public void printMatrix() {
+    public void printMatrix(boolean verbose) {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 if (matrix[j][i] == null) {
@@ -112,16 +116,23 @@ public class CΥΚalgorithm {
                 }
                 if (matrix[j][i].size() > 1) {
                     for (Cell cell : matrix[j][i]) {
+                        if(verbose){
                         System.out.print(cell.getThisCellValue() + " ");
-                        System.out.print("[" + cell.getLeftChild().getX() + "," + cell.getLeftChild().getY() + "] [");
+                        System.out.print("[" + cell.getLeftChild().getX() + "," + cell.getLeftChild().getY() + "],[");
                         System.out.print(cell.getRightChild().getX() + "," + cell.getRightChild().getY() + "]");
+                        }else{
+                            System.out.print(cell.getThisCellValue() + " ");
+                        }
                     }
                     System.out.print("\t\t");
                 } else if (matrix[j][i].size() == 1) {
+                    if(verbose){
                     System.out.print(matrix[j][i].get(0).getThisCellValue() + " [");
-                    System.out.print(matrix[j][i].get(0).getLeftChild().getX() + " , " + matrix[j][i].get(0).getLeftChild().getY() + "] , [");
-                    System.out.print(matrix[j][i].get(0).getRightChild().getX() + " , " + matrix[j][i].get(0).getRightChild().getY() + "]\t\t");
-
+                    System.out.print(matrix[j][i].get(0).getLeftChild().getX() + "," + matrix[j][i].get(0).getLeftChild().getY() + "],[");
+                    System.out.print(matrix[j][i].get(0).getRightChild().getX() + "," + matrix[j][i].get(0).getRightChild().getY() + "]\t\t");
+                    }else{
+                        System.out.print(matrix[j][i].get(0).getThisCellValue() + "\t\t");
+                    }
                 } else {
                     System.out.print("null\t\t");
                 }

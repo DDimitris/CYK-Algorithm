@@ -18,9 +18,9 @@ public class Main {
         Parser p = new Parser();
         p.parse(Constans.GRAMMAR_PATH);
 //        p.printListOfRules();
-        CΥΚalgorithm ckYalgorithm = new CΥΚalgorithm(p);
+        CΥΚalgorithm ckYalgorithm = new CΥΚalgorithm(p, true);
         ckYalgorithm.runAlgorithm("I saw the man with the telescope");
-        ckYalgorithm.printMatrix();
+        ckYalgorithm.printMatrix(false);
         TreeParse tree = new TreeParse(ckYalgorithm.getNumOfColumns(), ckYalgorithm.getNumOfRows(), ckYalgorithm.getMatrix());
         tree.printTree();
     }

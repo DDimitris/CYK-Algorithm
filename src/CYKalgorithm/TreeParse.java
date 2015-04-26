@@ -25,11 +25,13 @@ public class TreeParse {
     }
 
     public void printTree() {
-        System.out.println(numOfColumns + " " + numOfRows);
         List<Cell> startCell = matrix[numOfColumns - 1][0];
+        int counter = 1;
         for (Cell c : startCell) {
             List<Cell> hack = new ArrayList<>();
             hack.add(c);
+            System.out.println("\n<----- Tree " + counter + " ----->\n");
+            counter++;
             printRecurr(hack, 0, null);
         }
     }
